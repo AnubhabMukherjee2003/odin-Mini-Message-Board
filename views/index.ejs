@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Message Board</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-comments"></i> Mini Message Board</h1>
+            <p class="subtitle">Share your thoughts with the world</p>
+        </header>
+        
+        <main class="messages-container">
+            <div class="messages-header">
+                <h2>Messages</h2>
+                <span class="message-count"><%= messages.length %> <%= messages.length === 1 ? 'message' : 'messages' %></span>
+            </div>
+            
+            <ul class="message-list">
+              <% if (messages.length === 0) { %>
+                <li class="empty-state">
+                    <i class="fas fa-inbox fa-3x"></i>
+                    <p>No messages yet. Be the first to post!</p>
+                </li>
+              <% } else { %>
+                <% for (let i = 0; i < messages.length; i++) { %>
+                  <li class="message-card">
+                      <div class="message-content">
+                          <p class="message-text"><%= messages[i].text %></p>
+                          <div class="message-meta">
+                              <span class="message-user"><i class="fas fa-user"></i> <%= messages[i].user %></span>
+                              <span class="message-date"><i class="far fa-calendar-alt"></i> <%= messages[i].added.toLocaleDateString() %></span>
+                          </div>
+                      </div>
+                      <a href="<%= 'message/' + i %>" class="message-card-link" aria-label="View message details">
+                          <i class="fas fa-chevron-right"></i>
+                      </a>
+                  </li>
+                <% } %>
+              <% } %>
+            </ul>
+        </main>
+        
+        <footer>
+            <a href="/new" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Message
+            </a>
+            <p class="copyright">&copy; <%= new Date().getFullYear() %> Mini Message Board</p>
+        </footer>
+    </div>
+</body>
+</html>
